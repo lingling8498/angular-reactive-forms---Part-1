@@ -1,0 +1,117 @@
+<!--option 1 -->
+<!--
+  <h2>Hero Detail</h2>
+  <h3><i>A FormGroup with multiple FormControls</i></h3>
+  <form [formGroup]="heroForm">
+    <div class="form-group">
+      <label for="name" class="label label-primary">Name:</label>
+      <input class="form-control" id="name" placeholder="Enter name" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="street" class="label label-primary">Street:</label>
+      <input class="form-control" id="street" placeholder="Enter street" formControlName="street">
+    </div>
+    <div class="form-group">
+        <label for="city" class="label label-primary">City:</label>
+        <input class="form-control" id="city" placeholder="Enter city" formControlName="city">
+      </div>
+    <div class="form-group">
+        <label class="label label-primary" for="state">State:</label>
+        <select class="form-control" formControlName="state">
+            <option *ngFor="let state of states" [value]="state">{{state}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label class="label label-primary">Zip Code:</label>
+      <input class="form-control" id="zip" formControlName="zip" placeholder="Enter zip">
+    </div>
+    <div class="form-group">
+      <label class="label label-primary">Super power:</label>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" formControlName="power" value="flight">flight
+        </label>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" formControlName="power" value="x-ray vision">x-ray vision
+        </label>
+      </div>
+      <div class="form-check-inline disabled">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" formControlName="power" value="strength" disabled>strength
+        </label>
+      </div>
+    </div>
+    
+    <div class="form-group form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" formControlName="sidekick">I have a sidekick.
+      </label>
+    </div>
+  </form>
+
+<button type="button" class="btn btn-info" 
+        (click)="openModal()">Create template modal</button>
+<p>Form value: {{ heroForm.value | json }}</p>
+-->
+
+<!--option 2, 3, 4 -->
+<h2>Hero Detail</h2>
+<form [formGroup]="heroForm">
+  <div class="form-group">
+    <label for="name" class="label label-primary">Name:</label>
+    <input class="form-control" id="name" placeholder="Enter name" formControlName="name">
+  </div>
+  <div formGroupName="address" novalidate>
+    <div class="form-group">
+      <label for="street" class="label label-primary">Street:</label>
+      <input class="form-control" id="street" placeholder="Enter street" formControlName="street">
+    </div>
+    <div class="form-group">
+      <label for="city" class="label label-primary">City:</label>
+      <input class="form-control" id="city" placeholder="Enter City" formControlName="city">
+    </div>
+    <div class="form-group">
+      <label class="label label-primary" for="state">State:</label>
+      <select class="form-control" formControlName="state">
+          <option *ngFor="let state of states" [value]="state">{{state}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="zip" class="label label-primary">Zip Code:</label>
+      <input class="form-control" id="zip" placeholder="Enter Zip Code" formControlName="zip">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="label label-primary">Super power:</label>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" formControlName="power" value="flight">flight
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" formControlName="power" value="x-ray vision">x-ray vision
+      </label>
+    </div>
+    <div class="form-check-inline disabled">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" formControlName="power" value="strength">strength
+      </label>
+    </div>
+  </div>
+  <div class="form-group form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" formControlName="sidekick">I have a sidekick.
+    </label>
+  </div>
+</form>
+
+<button type="button" class="btn btn-primary" (click)="submitMe()">Submit Me</button>
+<button type="button" class="btn btn-warning" (click)="resetMe()">Clear Me</button>
+<br />
+<p>Form value: {{ heroForm.value | json }}</p>
+<p>Name value: {{ heroForm.get('name').value }}</p>
+<p>Street value: {{ heroForm.get('address.street').value}}</p>
+<p>Zip Code value: {{ heroForm.get('address.zip').value}}</p>
